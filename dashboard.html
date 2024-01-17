@@ -1,0 +1,125 @@
+<!DOCTYPE HTML><html>
+<head>
+  <title>ESP Web Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="icon" href="data:,">
+  <style>
+    html {font-family: Arial; display: inline-block; text-align: center;}
+    p { font-size: 1.2rem;}
+    body {  margin: 0;}
+    .topnav { overflow: hidden; background-color: #50B8B4; color: white; font-size: 1rem; }
+    .content { padding: 20px; }
+    .card { background-color: white; box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5); }
+    .cards { max-width: 800px; margin: 0 auto; display: grid; grid-gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .reading { font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <h1> WEB SERVER </h1>
+  </div>
+  <div class="content">
+    <div class="cards">
+      <div class="card">
+        <p> TEMPERATURE2</p><p><span class="reading"><span id="temp2">%TEMPERATURE2%</span> &deg;C</span></p>
+      </div>
+      <div class="card">
+        <p> HUMIDITY2</p><p><span class="reading"><span id="hum2">%HUMIDITY2%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> SOUNDVALUE2</p><p><span class="reading"><span id="sound2">%PRESSURE2%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> METHANE2</p><p><span class="reading"><span id="meth2">%METHANE2%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> MONOXIDE2</p><p><span class="reading"><span id="mono2">%MONOXIDE2%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> TEMPERATURE3</p><p><span class="reading"><span id="temp3">%TEMPERATURE3%</span> &deg;C</span></p>
+      </div>
+      <div class="card">
+        <p> HUMIDITY3</p><p><span class="reading"><span id="hum3">%HUMIDITY3%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> SOUNDVALUE3</p><p><span class="reading"><span id="sound3">%PRESSURE3%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> METHANE3</p><p><span class="reading"><span id="meth3">%METHANE3%</span> &percnt;</span></p>
+      </div>
+      <div class="card">
+        <p> MONOXIDE3</p><p><span class="reading"><span id="mono3">%MONOXIDE3%</span> &percnt;</span></p>
+      </div>
+    </div>
+  </div>
+<script>
+if (!!window.EventSource) {
+ var source = new EventSource('/events');
+ 
+ source.addEventListener('open', function(e) {
+  console.log("Events Connected");
+ }, false);
+ source.addEventListener('error', function(e) {
+  if (e.target.readyState != EventSource.OPEN) {
+    console.log("Events Disconnected");
+  }
+ }, false);
+ 
+ source.addEventListener('message', function(e) {
+  console.log("message", e.data);
+ }, false);
+ 
+ source.addEventListener('Temperature2', function(e) {
+  console.log("Temperature2", e.data);
+  document.getElementById("temp2").innerHTML = e.data;
+ }, false);
+ 
+ source.addEventListener('Humidity2', function(e) {
+  console.log("Humidity2", e.data);
+  document.getElementById("hum2").innerHTML = e.data;
+ }, false);
+ 
+ source.addEventListener('SoundValue2', function(e) {
+  console.log("SoundValue2", e.data);
+  document.getElementById("sound2").innerHTML = e.data;
+ }, false);
+
+ source.addEventListener('Methane2', function(e) {
+  console.log("Methane2", e.data);
+  document.getElementById("meth2").innerHTML = e.data;
+ }, false);
+
+ source.addEventListener('Monoxide2', function(e) {
+  console.log("Monoxide2", e.data);
+  document.getElementById("mono2").innerHTML = e.data;
+ }, false);
+
+ source.addEventListener('Temperature3', function(e) {
+  console.log("Temperature3", e.data);
+  document.getElementById("temp3").innerHTML = e.data;
+ }, false);
+ 
+ source.addEventListener('Humidity3', function(e) {
+  console.log("Humidity3", e.data);
+  document.getElementById("hum3").innerHTML = e.data;
+ }, false);
+ 
+ source.addEventListener('SoundValue3', function(e) {
+  console.log("SoundValue3", e.data);
+  document.getElementById("sound3").innerHTML = e.data;
+ }, false);
+
+ source.addEventListener('Methane3', function(e) {
+  console.log("Methane3", e.data);
+  document.getElementById("meth3").innerHTML = e.data;
+ }, false);
+
+ source.addEventListener('Monoxide3', function(e) {
+  console.log("Monoxide3", e.data);
+  document.getElementById("mono3").innerHTML = e.data;
+ }, false);
+}
+</script>
+</body>
+</html>
